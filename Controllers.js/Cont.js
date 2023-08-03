@@ -2,17 +2,15 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const validator = require("validator");
-const { v4: uuidv4 } = require("uuid");
-const nodemailer = require("nodemailer");
 
 exports.signup = async (req, res) => {
     try {
-      const { email, password } = req.body;
+      const { full_name,email,phone_number, password } = req.body;
 
-      if (!email || !password) {
+      if (!full_name|| !email|| !phone_number|| !password) {
         return res
           .status(400)
-          .json({ message: "Please provide email and password" });
+          .json({ message: "Please provide name, number, email and password" });
       }
 
       // Validate email format
@@ -30,6 +28,8 @@ exports.signup = async (req, res) => {
 
       const user = await User.create({
         email,
+        full_name,
+        phone_number,
         password: hashedPassword,
       });
 

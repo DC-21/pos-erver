@@ -14,14 +14,14 @@ const User = db.define('User', {
         required:true,
         unique:true,
     },
-    phone_number:{
-        type:Sequelize.INTEGER,
+    email:{
+        type:Sequelize.STRING,
         allowNull: false,
         required:true,
         unique:true,
     },
-    email:{
-        type:Sequelize.STRING,
+    phone_number:{
+        type:Sequelize.INTEGER,
         allowNull: false,
         required:true,
         unique:true,

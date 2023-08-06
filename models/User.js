@@ -30,8 +30,7 @@ const User = db.define('User', {
     },
     role: {
         type: Sequelize.STRING,
-        allowNull: false,
-        defaultValue: 'user',
+        allowNull: false
     }
 })
 

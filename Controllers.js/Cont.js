@@ -5,9 +5,9 @@ const validator = require("validator");
 
 exports.signup = async (req, res) => {
     try {
-      const { full_name,email,phone_number, password } = req.body;
+      const { full_name,email,phone_number, password, role } = req.body;
 
-      if (!full_name|| !email|| !phone_number|| !password) {
+      if (!full_name|| !email|| !phone_number|| !password|| !role) {
         return res
           .status(400)
           .json({ message: "Please provide name, number, email and password" });
@@ -31,6 +31,7 @@ exports.signup = async (req, res) => {
         full_name,
         phone_number,
         password: hashedPassword,
+        role,
       });
 
       res.status(201).json("User signed up successfully");

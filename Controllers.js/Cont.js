@@ -43,30 +43,36 @@ exports.signup = async (req, res) => {
   exports.login = async (req, res) => {
     try {
       const { email, password } = req.body;
-
+  
       if (!email || !password) {
         return res
           .status(400)
           .json({ message: "Please provide email and password" });
       }
-
+  
       const user = await User.findOne({ where: { email } });
-
+  
       if (!user) {
         console.log("Invalid email or password");
-        return res.status(401).json({ message: "User not Found" });
+        return res.status(401).json({ message: "User not found" });
       }
-
+  
       const isPasswordValid = await bcrypt.compare(password, user.password);
-
+  
       if (!isPasswordValid) {
         console.log("Invalid password");
         return res.status(401).json({ message: "Invalid credentials" });
       }
-
+  
       const token = jwt.sign({ userId: user.id }, Math.random().toString(16));
       console.log("Login successful");
-      return res.status(200).json({ message: "Login successful", token: token });
+      
+      // Include the user's role in the response
+      return res.status(200).json({
+        message: "Login successful",
+        token: token,
+        role: user.role // Include the role here
+      });
     } catch (error) {
       console.log("Error:", error);
       return res.status(500).json({ message: "An error occurred signing in" });

@@ -6,7 +6,6 @@ const bodyParser=require('body-parser');
 const app = express();
 
 app.use(cors());
-app.use(express.json());
 app.use(express.urlencoded({ extended:true}));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:false}));
@@ -25,8 +24,9 @@ app.get('/',(req,res)=>{
 
 sequelize.sync().then(()=>{
     console.log("Database successfully connected");
-    app.listen(3006)
-    console.log("App listening on http://localhost:3006");
+    app.listen(3006,()=>{
+        console.log("App listening on http://localhost:3006");
+    })
 }).catch(err=>{
     console.log(err);
 });

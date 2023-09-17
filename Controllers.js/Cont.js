@@ -2,6 +2,9 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const validator = require("validator");
+const crypto = require('crypto');
+
+const secretKey = crypto.randomBytes(32).toString('hex');
 
 exports.signUp = async(req,res)=>{
   try{
@@ -72,8 +75,13 @@ exports.login = async (req, res) => {
       console.log("Invalid password");
       return res.status(401).json({ message: "Invalid credentials" });
     }
-
-    const token = jwt.sign({ userId: user.id }, Math.random().toString(16));
+    const payload = {
+      userId: user.id,
+      email: user.email,
+      full_name:user.full_name,
+      role: user.role,
+    };
+    const token = jwt.sign(payload, secretKey);
     console.log(token);
     console.log("Login successful");
 
@@ -88,6 +96,23 @@ exports.login = async (req, res) => {
     return res.status(500).json({ message: "An error occurred signing in" });
   }
 };
+
+exports.verifyToken=async(req, res, next)=>{
+  const token = req.header('Authorization');
+
+  if (!token) {
+    return res.status(401).json({ message: 'Access denied. Token not provided.' });
+  }
+
+  try {
+    const decoded = jwt.verify(token.replace('Bearer ', ''), secretKey);
+    req.user = decoded; // Attach the user information to the request object
+    next(); // Continue to the route handler
+  } catch (error) {
+    console.error('Token verification error:', error);
+    res.status(401).json({ message: 'Access denied. Invalid token.' });
+  }
+}
 
 exports.deleteUser = async (req, res) => {
   try {

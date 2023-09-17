@@ -57,6 +57,10 @@ const Transactions = db.define("Transactions", {
     type: Sequelize.STRING,
     allowNull: false,
   },
+  servedby: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
   Post: {
     type: Sequelize.BOOLEAN,
     allowNull: false,

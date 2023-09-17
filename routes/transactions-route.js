@@ -3,8 +3,8 @@ const { getRCTNumber, getTransactions, createTransaction, updateTransaction } = 
 const router = require('express').Router();
 
 router.get('/receipt-number',getRCTNumber);
-router.get('/transaction',getTransactions);
-router.post('/transaction',createTransaction);
-router.put('/transaction',updateTransaction);
+router.get('/transactions',getTransactions);
+router.post('/transactions',createTransaction);
+router.put('/transactions',updateTransaction);
 
 module.exports=router

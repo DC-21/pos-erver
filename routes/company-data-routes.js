@@ -4,6 +4,6 @@ const router = require('express').Router();
 
 router.get('/company-data',getCompany);
 router.post('/company-data',createCompany);
-router.delete('/company-data',deleteCompany);
+router.delete('/company-data/:id',deleteCompany);
 
 module.exports = router;

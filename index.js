@@ -11,6 +11,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:false}));
 app.use('/',require('./routes/auth-routes.js'));
 app.use('/',require('./routes/customer-routes.js'));
+app.use('/',require('./routes/group-codes.js'));
 
 app.use((err, red, res, next)=>{
     console.log(err);

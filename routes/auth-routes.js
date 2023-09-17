@@ -6,7 +6,7 @@ const {
   deleteUser,
   updatePassword,
   verifyToken,
-} = require("../Controllers.js/Cont");
+} = require("../Controllers.js/auth-controller");
 
 router.post("/signup", signup);
 router.post("/login", login);

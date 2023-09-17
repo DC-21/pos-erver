@@ -9,7 +9,7 @@ app.use(cors());
 app.use(express.urlencoded({ extended:true}));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:false}));
-app.use('/',require('./routes/router'));
+app.use('/',require('./routes/auth-routes.js'));
 app.use('/',require('./routes/customer-routes.js'));
 
 app.use((err, red, res, next)=>{

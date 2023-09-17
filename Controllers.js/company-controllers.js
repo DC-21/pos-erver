@@ -14,7 +14,14 @@ async function getCompany (req, res) {
 async function createCompany (req, res) {
     try {
         const companyData = req.body;
-        const newCompany = await CompanyData.create(companyData);
+        const newCompany = await CompanyData.create({
+            Name: companyData.Name,
+            Address: companyData.Address,
+            Post_Address: companyData.Post_Address,
+            Telephone: companyData.Telephone,
+            Fax: companyData.Fax,
+            Email: companyData.Email,
+        });
 
         res.status(201).json({ message: 'Company created successfully.', company: newCompany });
     } catch (error) {

@@ -74,6 +74,7 @@ exports.login = async (req, res) => {
     }
 
     const token = jwt.sign({ userId: user.id }, Math.random().toString(16));
+    console.log(token);
     console.log("Login successful");
 
     // Include the user's role in the response

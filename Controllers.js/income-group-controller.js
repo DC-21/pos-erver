@@ -36,5 +36,27 @@ async function fetchGroupsCodes(req,res) {
     res.status(500).json({ message: "An error occurred while fetching data." });
   }
 }
+async function postIncomeGroupCodes(req,res){
+    try {
+        // Use the data stored in the global variable to save to the database
+        console.log('Data to be saved:', fetchedData);
+    
+        // Check if there is data in the fetchedData array
+        if (fetchedData.length === 0) {
+          return res.status(400).json({ message: 'No data to save.' });
+        }
+    
+        // Save the fetchedData array to the database using Sequelize bulkCreate
+        await IncomeGroups.bulkCreate(fetchedData);
+    
+        // Clear the data in the global variable after saving to the database
+        fetchedData = [];
+    
+        res.status(200).json({ message: 'Data saved successfully.' });
+      } catch (error) {
+        console.error('Error saving data:', error);
+        res.status(500).json({ message: 'An error occurred while saving data.' });
+      }
+}
 
-module.exports={fetchGroupsCodes};
+module.exports={fetchGroupsCodes,postIncomeGroupCodes};

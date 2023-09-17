@@ -103,4 +103,14 @@ async function updateIncomeGroupCodes(req, res) {
   }
 }
 
-module.exports = { fetchGroupsCodes, postIncomeGroupCodes,updateIncomeGroupCodes };
+async function getCodes(req,res){
+    try{
+        const codes = await IncomeGroups.findAll();
+        return res.json({codes});
+      }catch (error) {
+        console.error("Error fetching income group codes:", error);
+        return res.status(500).json({ error: "Internal server error" });
+      }
+}
+
+module.exports = { fetchGroupsCodes, postIncomeGroupCodes,updateIncomeGroupCodes,getCodes };

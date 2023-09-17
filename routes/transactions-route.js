@@ -5,6 +5,6 @@ const router = require('express').Router();
 router.get('/receipt-number',getRCTNumber);
 router.get('/transactions',getTransactions);
 router.post('/transactions',createTransaction);
-router.put('/transactions',updateTransaction);
+router.put('/transactions/:id',updateTransaction);
 
 module.exports=router

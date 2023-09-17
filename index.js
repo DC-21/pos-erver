@@ -13,6 +13,7 @@ app.use('/',require('./routes/auth-routes.js'));
 app.use('/',require('./routes/customer-routes.js'));
 app.use('/',require('./routes/group-codes-routes.js'));
 app.use('/',require('./routes/gl-accounts-routes.js'));
+app.use('/',require('./routes/transactions-route'))
 
 app.use((err, red, res, next)=>{
     console.log(err);

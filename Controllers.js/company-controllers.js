@@ -42,4 +42,4 @@ async function deleteCompany (req, res){
     }
 };
 
-module.exports = router;
+module.exports = {getCompany,createCompany,deleteCompany};
